@@ -1,12 +1,16 @@
 ﻿using System;
 
+
 namespace GSMTest
 {
     class Program
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            GsmModem.Initialize("COM5");
+            
+            Console.WriteLine("Press any key");
+            Console.ReadKey();
         }
     }
 }
