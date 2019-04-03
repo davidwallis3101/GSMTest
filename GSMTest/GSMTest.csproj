@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="System.IO.Ports" Version="4.6.0-preview.19073.11" />
+    <PackageReference Include="System.IO.Ports" Version="4.6.0-preview.18571.3" />
   </ItemGroup>
 
 </Project>

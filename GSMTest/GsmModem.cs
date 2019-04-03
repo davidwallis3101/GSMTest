@@ -11,14 +11,16 @@ namespace GSMTest
         public static void Initialize(string portName)
         {
             Log($"Initialising GSM Modem on port {portName}");
-            sp = new SerialPort(portName);
-            sp.Encoding = Encoding.UTF8;
-            sp.BaudRate = 9600;
-            // sp.Handshake = Handshake.XOnXOff;
+            sp = new SerialPort(portName)
+            {
+                Encoding = Encoding.UTF8,
+                BaudRate = 9600,
+                // sp.Handshake = Handshake.XOnXOff;
 
-            sp.DataBits = 8;
-            sp.Parity = Parity.None;
-            sp.StopBits = StopBits.One;
+                //DataBits = 8,
+                //Parity = Parity.None,
+                //StopBits = StopBits.One
+            };
 
             //sp.ReadTimeout = 1000;
             //sp.WriteTimeout = 1000;
@@ -27,8 +29,19 @@ namespace GSMTest
             
             Log("Turning local echo off");
             sp.Write("ATE0"); // Local Echo off
-            //System.Threading.Thread.Sleep(500);
-            Console.WriteLine(sp.ReadLine());
+            System.Threading.Thread.Sleep(100); // make sure data sent
+          
+            int totalBytes = sp.BytesToRead;
+
+            if (totalBytes > 0)
+            {
+
+                Console.WriteLine(sp.ReadLine());
+            }
+            else
+            {
+                Console.WriteLine("No Bytes");
+            }
 
             Log("Switching to data mode");
             sp.Write("AT+CMGF=1"); // SMS Mode
